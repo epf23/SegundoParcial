@@ -25,6 +25,14 @@ def forgot_password():
 def p404():
     return render_template("404.html")
 
+@app.route('/Activo_fijo.html')
+def Activo_fijo():
+    return render_template("Activo_fijo.html")
+
+@app.route('/Empleados.html')
+def Empleados():
+    return render_template("Empleados.html")
+
 @app.route('/Administracion.html')
 def administracion():
     return render_template("Administracion.html")
@@ -61,7 +69,7 @@ def register():
 def tables():
     return render_template("tables.html")
 
-@app.route('/tipos-de-activos.html')
+@app.route('/Tipos-de-activos.html')
 def tipos_de_activos():
     return render_template("tipos-de-activos.html")
 
