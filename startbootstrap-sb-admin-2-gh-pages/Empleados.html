@@ -320,16 +320,44 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
+          <h1 class="h3 mb-2 text-gray-800">Empleados</h1>
 
           <form method="POST">
             <div class="form-label-group">
-              <input type="text" id="inputDescripcion" name="description" class="form-control" placeholder="Descripcion" required autofocus>
+              <input type="text" id="inputNombre" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
             </br>
             </div>
 
             <div class="form-label-group">
-              <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
+                <input type="text" id="inputCedula" name="cedula" class="form-control" placeholder="Cedula" required autofocus>
+              </br>
+              </div>
+
+            <div class="form-label-group">
+                <input type="text" id="inputDepartamento" name="departamento" class="form-control" placeholder="Departamento" required autofocus>
+              </br>
+              </div>
+
+              <div class="form-label-group">
+                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" placeholder="Fecha Ingreso" required autofocus>
+              </br>
+              </div>
+
+            <div class="form-label-group">
+                <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
+                <option value="Fisico" selected="selected">
+                    Fisico
+                </option>
+                <option value="Juridico">
+                    Juridico
+                </option>
+            </select>
+            </td>
+          </br>
+              </div>
+
+            <div class="form-label-group">
+              <td><select size="1" id="row-2-office" class="form-control" name="row-2-office">
               <option value="Activo" selected="selected">
                   Activo
               </option>
@@ -356,18 +384,27 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Descripcion</th>
+                      <th>Nombre</th>
+                      <th>Cedula</th>
+                      <th>Departamento</th>
+                      <th>Tipo Persona</th>
+                      <th>Fecha de Ingreso</th>
                       <th>Estado</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cedula</th>
+                        <th>Departamento</th>
+                        <th>Tipo Persona</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Estado</th>
                     </tr>
                   </tfoot>
                   <tbody>
+                    
                     
                   </tbody>
                 </table>

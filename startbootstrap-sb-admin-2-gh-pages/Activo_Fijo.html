@@ -22,7 +22,7 @@
   });
   </script>
 
-  <title>Activo Fijo - Departamentos</title>
+  <title>Activo Fijo</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,57 +64,61 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       
       <!-- Nav Item - Empleados -->
       <li class="nav-item">
-          <a class="nav-link" href="Empleados.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Empleados</span></a>
-        </li>
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartamentos" aria-expanded="true" aria-controls="collapse">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Departamentos</span>
-          </a>
-          <div id="collapseDepartamentos" class="collapse" aria-labelledby="headingDepartamentos" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="Administracion.html">Administracion</a>
-              <a class="collapse-item" href="Finanzas.html">Finanzas</a>
-              <a class="collapse-item" href="Recursos_humanos.html">Recursos Humanos</a>
-              
+            <a class="nav-link" href="Empleados.html">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Empleados</span></a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartamentos" aria-expanded="true" aria-controls="collapse">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Departamentos</span>
+            </a>
+            <div id="collapseDepartamentos" class="collapse" aria-labelledby="headingDepartamentos" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="Administracion.html">Administracion</a>
+                <a class="collapse-item" href="Finanzas.html">Finanzas</a>
+                <a class="collapse-item" href="Recursos_humanos.html">Recursos Humanos</a>
+                
+              </div>
             </div>
-          </div>
-        </li>
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseActivos" aria-expanded="true" aria-controls="collapse">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Activos</span>
-          </a>
-          <div id="collapseActivos" class="collapse" aria-labelledby="headingActivos" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="Activo_Fijo.html">Activos Fijos</a>
-              <a class="collapse-item" href="Tipos-de-activos.html">Tipos de Activos</a>
-              
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseActivos" aria-expanded="true" aria-controls="collapse">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Activos</span>
+            </a>
+            <div id="collapseActivos" class="collapse" aria-labelledby="headingActivos" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="Activo_Fijo.html">Activos Fijos</a>
+                <a class="collapse-item" href="Tipos-de-activos.html">Tipos de Activos</a>
+                
+              </div>
             </div>
-          </div>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Settings</span>
-          </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="404.html">Cuenta</a>
-              <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="404.html">Cuenta</a>
+                <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -320,27 +324,44 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
+          <h1 class="h3 mb-2 text-gray-800">Activo Fijo</h1>
 
-          <form method="POST">
-            <div class="form-label-group">
-              <input type="text" id="inputDescripcion" name="description" class="form-control" placeholder="Descripcion" required autofocus>
-            </br>
+          <div class="form-group row">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Descripcion">
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Departamento">
+              </div>
             </div>
 
-            <div class="form-label-group">
-              <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
-              <option value="Activo" selected="selected">
-                  Activo
-              </option>
-              <option value="Inactivo">
-                  Inactivo
-              </option>
-          </select>
-          </td>
-        </br>
-            </div>
-            
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Valor Compra">
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Depreciación Acumulada">
+                </div>
+              </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
+                        <option value="Activo" selected="selected">
+                            Activo
+                        </option>
+                        <option value="Inactivo">
+                            Inactivo
+                        </option>
+                    </select>
+                    </td>
+                </div>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control form-control-user" id="exampleLastName" placeholder="FechaRegistro">
+                </div>
+              </div>
+
+              
             <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" id="btn-add">Agregar</button>
             <div class="text-center">
             </div>
@@ -357,14 +378,22 @@
                     <tr>
                       <th>ID</th>
                       <th>Descripcion</th>
-                      <th>Estado</th>
+                      <th>Departamento</th>
+                      <th>Tipo Activo</th>
+                      <th>Fecha de Registro</th>
+                      <th>Valor Compra</th>
+                      <th>Depreciación Acumulada</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
+                            <th>ID</th>
+                            <th>Descripcion</th>
+                            <th>Departamento</th>
+                            <th>Tipo Activo</th>
+                            <th>Fecha de Registro</th>
+                            <th>Valor Compra</th>
+                            <th>Depreciación Acumulada</th>
                     </tr>
                   </tfoot>
                   <tbody>
