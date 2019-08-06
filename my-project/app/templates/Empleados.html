@@ -9,19 +9,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <script>
-  $(function(){
-    $('#btn-add').click(function(){
-      var description = $('input[name="descripcion"]').val();
-      var estado = $('select[name="row-1-office"]').val();
-
-      var _tr = '<tr><td>'+ description +'</td> <td>'+ estado +'</td></tr>';
-
-      $('tbody').append(_tr);
-    });
-  });
-  </script>
-
   <title>Activo Fijo - Departamentos</title>
 
   <!-- Custom fonts for this template-->
@@ -323,24 +310,24 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Empleados</h1>
 
-          <form method="POST">
+          <form action="{{ url_for('btn_agregar_e') }}" method="post">
             <div class="form-label-group">
-              <input type="text" id="inputNombre" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
+              <input type="text" id="inputNombre" name="nombre" class="form-control" placeholder="Nombre" name='nombre' required autofocus>
             </br>
             </div>
 
             <div class="form-label-group">
-                <input type="text" id="inputCedula" name="cedula" class="form-control" placeholder="Cedula" required autofocus>
+                <input type="text" id="inputCedula" name="cedula" class="form-control" placeholder="Cedula" name='cedula' required autofocus>
               </br>
               </div>
 
             <div class="form-label-group">
-                <input type="text" id="inputDepartamento" name="departamento" class="form-control" placeholder="Departamento" required autofocus>
+                <input type="text" id="inputDepartamento" name="departamento" class="form-control" placeholder="Departamento" name='departamento' required autofocus>
               </br>
               </div>
 
               <div class="form-label-group">
-                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" placeholder="Fecha Ingreso" required autofocus>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" placeholder="Fecha Ingreso" name='fingreso' required autofocus>
               </br>
               </div>
 

@@ -310,9 +310,9 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Finanzas</h1>
 
-          <form>
+          <form action="{{ url_for('btn_agregar_f') }}" method="post">
             <div class="form-label-group">
-              <input type="text" id="inputDescripcion" class="form-control" placeholder="Descripcion" required autofocus>
+              <input type="text" id="inputDescripcion" class="form-control" name='descripcion' placeholder="Descripcion" required autofocus>
             </br>
             </div>
 

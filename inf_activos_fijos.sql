@@ -16,13 +16,13 @@ CREATE TABLE `tipo_activos` (
 `ta_CCDepreciacion` int NOT NULL,
 `ta_estado` VARCHAR(30) NOT NULL DEFAULT 'Activo'
 );
-
+Insert into inf_Activos_Fijos.tipo_activos (ta_descripcion, ta_CCCompra, ta_CCDepreciacion, ta_estado) values ('carro', 3165, 2145, 'Activo');
+select * from `tipo_activos`;
 CREATE TABLE `empleados` (
 `id_empleado` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `emp_nombre` VARCHAR(30) NOT NULL,
 `emp_cedula` VARCHAR(13) NOT NULL,
-`id_departamento` int NOT NULL, 
-FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento),
+`emp_departamento` VARCHAR(60) NOT NULL, 
 `emp_tipo_persona` VARCHAR(10) NOT NULL DEFAULT 'Fisica',
 `emp_fecha_ingreso` date NOT NULL,
 `emp_estado` VARCHAR(30) NOT NULL DEFAULT 'Activo'
@@ -31,10 +31,8 @@ FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento),
 CREATE TABLE `activos_fijos` (
 `id_activos_fijos` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `act_descripcion` VARCHAR(60) NOT NULL,
-`id_departamento` int NOT NULL, 
-FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento),
-`id_tipo_activo` int NOT NULL,
-FOREIGN KEY (id_tipo_activo) REFERENCES tipo_activos(id_tipo_activo),
+`act_departamento` VARCHAR(60) NOT NULL, 
+`act_tipo_activo` VARCHAR(60) NOT NULL,
 `act_fecha_registro` date NOT NULL,
 `act_valor_compra` DECIMAL NOT NULL,
 `act_depreciacion_acumulada` DECIMAL NOT NULL

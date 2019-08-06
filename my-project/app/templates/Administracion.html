@@ -9,19 +9,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <script>
-  $(function(){
-    $('#btn-add').click(function(){
-      var description = $('input[name="descripcion"]').val();
-      var estado = $('select[name="row-1-office"]').val();
-
-      var _tr = '<tr><td>'+ description +'</td> <td>'+ estado +'</td></tr>';
-
-      $('tbody').append(_tr);
-    });
-  });
-  </script>
-
   <title>Activo Fijo - Departamentos</title>
 
   <!-- Custom fonts for this template-->
@@ -323,9 +310,9 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
 
-          <form method="POST">
+          <form action="{{ url_for('btn_agregar_a') }}" method="post">
             <div class="form-label-group">
-              <input type="text" id="inputDescripcion" name="description" class="form-control" placeholder="Descripcion" required autofocus>
+              <input type="text" id="inputDescripcion" name="description" class="form-control" name='descripcion' placeholder="Descripcion" required autofocus>
             </br>
             </div>
 
@@ -342,7 +329,7 @@
         </br>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" id="btn-add">Agregar</button>
+            <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick="addRow()">Agregar</button>
             <div class="text-center">
             </div>
           </form>
