@@ -11,8 +11,8 @@ from app import app
 ##Conexión a la BD
 inf_Activos_Fijos = mysql.connector.connect(
   host="localhost",
-  user="root",
-  passwd="admin",
+  user="estefania",
+  passwd="password",
   database="inf_Activos_Fijos"
 )
 cursor = inf_Activos_Fijos.cursor()
@@ -43,6 +43,30 @@ def p404():
 @app.route('/Activo_Fijo.html')
 def Activo_fijo():
     return render_template("Activo_fijo.html")
+
+@app.route('/Depreciacion.html')
+def depreciacion():
+    return render_template("Depreciacion.html")
+
+@app.route('/btn_agregar_dp', methods=['POST'])
+def btn_agregar_dp():
+    ano_proceso = request.form['ano_proceso']
+    activos_fijos = request.form['activos_fijos']
+    mes_proceso = request.form['mes_proceso']
+    fecha_proceso = request.form['fecha_proceso']
+    monto_depreciado = request.form['monto_dep']
+    depreciacion_acumulada = request.form['dep_acu']
+    cuenta_compra = request.form['cuenta_co']
+    cuenta_depreciacion = request.form['cuenta_dep']
+    valor_compra = cuenta_compra
+    ano_dep = ano_proceso
+    monto_dep = valor_compra / ano_dep
+    dep_ac = monto_dep
+    dep_rest = valor_compra - dep_ac
+    
+    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+ano_proceso+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+"', "+cuenta_compra+", "+cuenta_depreciacion");")
+    inf_Activos_Fijos.commit()
+    return render_template("Depreciacion.html")
 
 @app.route('/btn_agregar_af', methods=['POST'])
 def btn_agregar_af():
@@ -155,11 +179,11 @@ def finanzas():
 
     for a, b, c in data:
         print(a,b,c)
-        aa = a
-        bb = b
-        cc = c
+        a = a
+        b = b
+        c = c
 
-    departamentos = [departamento(aa, bb, cc)]
+    departamentos = [departamento(a, b, c)]
 #    departamentos = ""
 #    i = 0
 #    while i < (len(tabla)%3 == 0):

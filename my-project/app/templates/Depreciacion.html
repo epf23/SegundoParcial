@@ -9,18 +9,30 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Activo Fijo - Departamentos</title>
+  <script>
+  $(function(){
+    $('#btn-add').click(function(){
+      var description = $('input[name="descripcion"]').val();
+      var estado = $('select[name="row-1-office"]').val();
 
-  <!-- Custom fonts for this template-->
-  <link href="{{ url_for('static', filename = 'vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+      var _tr = '<tr><td>'+ description +'</td> <td>'+ estado +'</td></tr>';
+
+      $('tbody').append(_tr);
+    });
+  });
+  </script>
+
+  <title>Activo Fijo</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="{{ url_for('static', filename = 'css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+  <!-- Custom styles for this template -->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="{{ url_for('static', filename = 'vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -52,58 +64,62 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-
+      
       <!-- Nav Item - Empleados -->
       <li class="nav-item">
-          <a class="nav-link" href="Empleados.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Empleados</span></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartamentos" aria-expanded="true" aria-controls="collapse">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Departamentos</span>
-          </a>
-          <div id="collapseDepartamentos" class="collapse" aria-labelledby="headingDepartamentos" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="Administracion.html">Administracion</a>
-              <a class="collapse-item" href="Finanzas.html">Finanzas</a>
-              <a class="collapse-item" href="Recursos_humanos.html">Recursos Humanos</a>
-
+            <a class="nav-link" href="Empleados.html">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Empleados</span></a>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartamentos" aria-expanded="true" aria-controls="collapse">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Departamentos</span>
+            </a>
+            <div id="collapseDepartamentos" class="collapse" aria-labelledby="headingDepartamentos" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="Administracion.html">Administracion</a>
+                <a class="collapse-item" href="Finanzas.html">Finanzas</a>
+                <a class="collapse-item" href="Recursos_humanos.html">Recursos Humanos</a>
+                
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+    
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseActivos" aria-expanded="true" aria-controls="collapse">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Activos</span>
+            </a>
+            <div id="collapseActivos" class="collapse" aria-labelledby="headingActivos" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="Activo_Fijo.html">Activos Fijos</a>
+                <a class="collapse-item" href="Tipos-de-activos.html">Tipos de Activos</a>
+                <a class="collapse-item" href="Depreciacion.html">Depreciacion</a>
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseActivos" aria-expanded="true" aria-controls="collapse">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Activos</span>
-          </a>
-          <div id="collapseActivos" class="collapse" aria-labelledby="headingActivos" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="Activo_Fijo.html">Activos Fijos</a>
-              <a class="collapse-item" href="Tipos-de-activos.html">Tipos de Activos</a>
-              <a class="collapse-item" href="Depreciacion.html">Depreciacion</a>
-
+              </div>
             </div>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Settings</span>
-          </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="404.html">Cuenta</a>
-              <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="404.html">Cuenta</a>
+                <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -164,7 +180,6 @@
                 <h6 class="dropdown-header">
                   Alerts Center
                 </h6>
-                
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
               </div>
             </li>
@@ -224,31 +239,49 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Recursos Humanos</h1>
+          <h1 class="h3 mb-2 text-gray-800">Depreciación</h1>
 
-          <form action="{{ url_for('btn_agregar_rh') }}" method="post">
-            <div class="form-label-group">
-              <input type="text" id="inputDescripcion" class="form-control" name='descripcion' placeholder="Descripcion" required autofocus>
-            </br>
-            </div>
-
-            <div class="form-label-group">
-              <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
-              <option value="Activo" selected="selected">
-                  Activo
-              </option>
-              <option value="Inactivo">
-                  Inactivo
-              </option>
-          </select>
-          </td>
-        </br>
-            </div>
-
-            <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick="addRow()">Agregar</button>
-            <div class="text-center">
-            </div>
-          </form>
+          <form action="{{ url_for('btn_agregar_af') }}" method="post">
+              <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Año Proceso" name='año_Proceso'>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Mes Proceso" name='mes_Proceso'>
+                  </div>
+                </div>
+    
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Activo Fijo" name='activos_fijos'>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Depreciación Acumulada" name='depreciacion_acumulada'>
+                    </div>
+                  </div>
+    
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
+                            <option value="Circulante" selected="selected">
+                                Circulante
+                            </option>
+                            <option value="Pasivo">
+                                Pasivo
+                            </option>
+                        </select>
+                        </td>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control form-control-user" id="exampleLastName" placeholder="FechaRegistro" name='fecharegistro'>
+                    </div>
+                  </div>
+    
+    
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" id="btn-add">Agregar</button>
+                <div class="text-center">
+                </div>
+              </form>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -260,50 +293,29 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
+                      <th>Año Proceso</th>
+                      <th>Mes Procesado</th>
+                      <th>Activo Fijo</th>
+                      <th>Monto despreciado</th>
+                      <th>Depreciación Acumulada</th>
+                      <th>Cuenta Compra</th>
+                      <th>Cuenta Depreciacion</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
+                        <th>ID</th>
+                        <th>Año Proceso</th>
+                        <th>Mes Procesado</th>
+                        <th>Activo Fijo</th>
+                        <th>Monto despreciado</th>
+                        <th>Depreciación Acumulada</th>
+                        <th>Cuenta Compra</th>
+                        <th>Cuenta Depreciacion</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Administracion</td>
-                      <td>Activo</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Recursos Humanos</td>
-                      <td>Activo</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Finanzas</td>
-                      <td>Activo</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Contabilidad</td>
-                      <td>Activo</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Inventario</td>
-                      <td>Activo</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Compra</td>
-                      <td>Activo</td>
-                    </tr>
-
-                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
@@ -357,21 +369,21 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="{{ url_for('static', filename = 'vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="{{ url_for('static', filename = 'js/sb-admin-2.min.js') }}"></script>
+  <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="{{ url_for('static', filename = 'vendor/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url_for('static', filename = 'vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="{{ url_for('static', filename = 'js/demo/datatables-demo.js') }}"></script>
+  <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
