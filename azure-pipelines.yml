@@ -17,15 +17,6 @@ steps:
     versionSpec: '3.7'
     architecture: 'x64'
 
-- script: |
-    python3.7 -m venv antenv3.7
-    source antenv3.7/bin/activate
-    pip3.7 install setuptools
-    pip3.7 install -r requirements.txt
-
-  # The displayName is shows in the pipeline UI when a build runs
-  displayName: 'Install Dependencies'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
@@ -33,18 +24,31 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
     replaceExistingArchive: true
-    verbose: # Optional
+    verbose: # (no value); this input is optional
 
 - task: AzureRMWebAppDeployment@4
   displayName: Azure App Service Deploy
   inputs:
     appType: webAppLinux
-    RuntimeStack: 'PYTHON|3.7'
+    RuntimeStack: 'PYTHON|3.6'
     ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
     Package: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
 
-    # The following command is specific to the python-sample-vscode-flask-tutorial code.
-    # You may or may not need a startup command for your own app.
+    # The following parameter is specific to the Flask example code. You may
+    # or may not need a startup command for your own app.
 
     StartupCommand: 'gunicorn --bind=0.0.0.0 --workers=4 startup:app'
+
+# The | symbol is a continuation character, indicating a multi-line script.
+# A single-line script can immediately follows "- script:" without the |.
+- script: |
+    # antenv3.6 is the virtual environment name that App Service expects with
+    # Python 3.6; use "antenv" for Python 3.7.
+    python3.6 -m venv antenv3.6
+    source antenv3.6/bin/activate
+    pip3.6 install setuptools
+    pip3.6 install -r requirements.txt
+
+  # The displayName is shows in the pipeline UI when a build runs
+  displayName: 'Install Dependencies'
