@@ -3,7 +3,7 @@ variables:
   ConnectedServiceName: 'AzurePrimary'
 
   # Replace this name to match the name of the App Service you created earlier
-  WebAppName: 'Flask Pipelines'
+  WebAppName: 'FlaskPipelines'
 
 trigger:
 - master
