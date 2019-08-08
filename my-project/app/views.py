@@ -11,8 +11,8 @@ from app import app
 ##Conexión a la BD
 inf_Activos_Fijos = mysql.connector.connect(
   host="localhost",
-  user="root",
-  passwd="admin",
+  user="estefania",
+  passwd="password",
   database="inf_Activos_Fijos"
 )
 cursor = inf_Activos_Fijos.cursor()
@@ -26,15 +26,6 @@ def index1():
 @app.route('/index.html')
 def index2():
     return render_template("index.html")
-
-@app.route('/login.html')
-def login():
-    return render_template("login.html")
-
-@app.route('/forgot-password.html')
-def forgot_password():
-    return render_template("forgot-password.html")
-
 
 @app.route('/404.html')
 def p404():
@@ -64,6 +55,14 @@ def Activo_fijo():
             self.valor_compra = valor_compra
             self.depreciacion_acumulada = depreciacion_acumulada
 
+    a = ""
+    b = ""
+    c = ""
+    d = ""
+    e = ""
+    f = ""
+    g = ""
+
     for a, b, c, d, e, f, g in data:
         print(a,b,c,d,e,f,g)
 
@@ -88,7 +87,7 @@ def depreciacion():
         cuenta_depreciacion = Col('Cuenta Depreciación')
 
     class calculo_depreciacion(object):
-        def __init__(self, id, ano_proceso, mes_proceso, fecha_proceso, monto_depreciado, depreciacion_acumulada, cuenta_compra):
+        def __init__(self, id, ano_proceso, mes_proceso, fecha_proceso, monto_depreciado, depreciacion_acumulada, cuenta_compra, cuenta_depreciacion):
             self.id = id
             self.ano_proceso = ano_proceso
             self.mes_proceso = mes_proceso
@@ -97,6 +96,16 @@ def depreciacion():
             self.depreciacion_acumulada = depreciacion_acumulada
             self.cuenta_compra = cuenta_compra
             self.cuenta_depreciacion = cuenta_depreciacion
+
+    
+    a = ""
+    b = ""
+    c = ""
+    d = ""
+    e = ""
+    f = ""
+    g = ""
+    h = ""
 
     for a, b, c, d, e, f, g, h in data:
         print(a,b,c,d,e,f,g,h)
@@ -114,7 +123,7 @@ def btn_agregar_dp():
     fecha_proceso = request.form['fecha_proceso']
     monto_depreciado = request.form['monto_dep']
     depreciacion_acumulada = request.form['depreciacion_acumulada']
-    cuenta_compra = request.form['row-1-office']
+    cuenta_compra = request.form['cuenta_compra']
     cuenta_depreciacion = request.form['cuenta_dep']
     valor_compra = cuenta_compra
     ano_dep = ano_proceso
@@ -174,6 +183,14 @@ def Empleados():
             self.fecha_ingreso = fecha_ingreso
             self.estado = estado
 
+    a = ""
+    b = ""
+    c = ""
+    d = ""
+    e = ""
+    f = ""
+    g = ""
+
     for a, b, c, d, e, f, g in data:
         print(a,b,c,d,e,f,g)
 
@@ -198,6 +215,10 @@ def administracion():
             self.descripcion = descripcion
             self.estado = estado
 
+    a = ""
+    b = ""
+    c = ""
+    
     for a, b, c in data:
         print(a,b,c)
 
@@ -283,6 +304,10 @@ def finanzas():
             self.descripcion = descripcion
             self.estado = estado
 
+    a = ""
+    b = ""
+    c = ""
+
     for a, b, c in data:
         print(a,b,c)
 
@@ -313,6 +338,10 @@ def recursos_humanos():
             self.id = id
             self.descripcion = descripcion
             self.estado = estado
+
+    a = ""
+    b = ""
+    c = ""
 
     for a, b, c in data:
         print(a,b,c)
