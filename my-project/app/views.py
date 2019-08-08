@@ -11,8 +11,8 @@ from app import app
 ##Conexión a la BD
 inf_Activos_Fijos = mysql.connector.connect(
   host="localhost",
-  user="estefania",
-  passwd="password",
+  user="root",
+  passwd="admin",
   database="inf_Activos_Fijos"
 )
 cursor = inf_Activos_Fijos.cursor()
@@ -42,11 +42,69 @@ def p404():
 
 @app.route('/Activo_Fijo.html')
 def Activo_fijo():
-    return render_template("Activo_fijo.html")
+    cursor.execute("select * from `activos_fijos`;")
+    data = cursor.fetchall()
+    print(*data)
+    class activos_fijosTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        departamento = Col('Departamento')
+        tipo_activo = Col('Tipo de Activo')
+        fecha_registro = Col('Fecha de Registro')
+        valor_compra = Col('Valor Compra')
+        depreciacion_acumulada = Col('Depreciación Acumulada')
+
+    class activos_fijo(object):
+        def __init__(self, id, descripcion, departamento, tipo_activo, fecha_registro, valor_compra, depreciacion_acumulada):
+            self.id = id
+            self.descripcion = descripcion
+            self.departamento = departamento
+            self.tipo_activo = tipo_activo
+            self.fecha_registro = fecha_registro
+            self.valor_compra = valor_compra
+            self.depreciacion_acumulada = depreciacion_acumulada
+
+    for a, b, c, d, e, f, g in data:
+        print(a,b,c,d,e,f,g)
+
+    activos_fijo = [activos_fijo(a, b, c, d, e, f, g)]
+    table = activos_fijosTable(activos_fijo)
+
+    return render_template("Activo_fijo.html", table = table)
 
 @app.route('/Depreciacion.html')
 def depreciacion():
-    return render_template("Depreciacion.html")
+    cursor.execute("select * from `calculo_depreciacion`;")
+    data = cursor.fetchall()
+    print(*data)
+    class calculo_depreciacionTable(Table):
+        id = Col('ID')
+        ano_proceso = Col('Ano de proceso')
+        mes_proceso= Col('Mes de proceso')
+        fecha_proceso = Col('Fecha de proceso')
+        monto_depreciado = Col('Monto Depreciado')
+        depreciacion_acumulada = Col('Depreciación Acumulada')
+        cuenta_compra = Col('Cuenta Compra')
+        cuenta_depreciacion = Col('Cuenta Depreciación')
+
+    class calculo_depreciacion(object):
+        def __init__(self, id, ano_proceso, mes_proceso, fecha_proceso, monto_depreciado, depreciacion_acumulada, cuenta_compra):
+            self.id = id
+            self.ano_proceso = ano_proceso
+            self.mes_proceso = mes_proceso
+            self.fecha_proceso = fecha_proceso
+            self.monto_depreciado = monto_depreciado
+            self.depreciacion_acumulada = depreciacion_acumulada
+            self.cuenta_compra = cuenta_compra
+            self.cuenta_depreciacion = cuenta_depreciacion
+
+    for a, b, c, d, e, f, g, h in data:
+        print(a,b,c,d,e,f,g,h)
+
+    depreciacion = [calculo_depreciacion(a, b, c, d, e, f, g, h)]
+    table = calculo_depreciacionTable(depreciacion)
+
+    return render_template("Depreciacion.html", table = table)
 
 @app.route('/btn_agregar_dp', methods=['POST'])
 def btn_agregar_dp():
@@ -55,16 +113,16 @@ def btn_agregar_dp():
     mes_proceso = request.form['mes_proceso']
     fecha_proceso = request.form['fecha_proceso']
     monto_depreciado = request.form['monto_dep']
-    depreciacion_acumulada = request.form['dep_acu']
-    cuenta_compra = request.form['cuenta_co']
+    depreciacion_acumulada = request.form['depreciacion_acumulada']
+    cuenta_compra = request.form['row-1-office']
     cuenta_depreciacion = request.form['cuenta_dep']
     valor_compra = cuenta_compra
     ano_dep = ano_proceso
     monto_dep = valor_compra / ano_dep
     dep_ac = monto_dep
     dep_rest = valor_compra - dep_ac
-    
-    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+ano_proceso+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+"', "+cuenta_compra+", "+cuenta_depreciacion");")
+
+    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+ano_proceso+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+"', "+cuenta_compra+", "+cuenta_depreciacion+");")
     inf_Activos_Fijos.commit()
     return render_template("Depreciacion.html")
 
@@ -94,11 +152,59 @@ def btn_agregar_ta():
 
 @app.route('/Empleados.html')
 def Empleados():
-    return render_template("Empleados.html")
+    cursor.execute("select * from `empleados`;")
+    data = cursor.fetchall()
+    print(*data)
+    class empleadosTable(Table):
+        id = Col('ID')
+        nombre = Col('Nombre')
+        cedula = Col('Cedula')
+        departamento = Col('Departamento')
+        tipo_persona = Col('Tipo de Persona')
+        fecha_ingreso = Col('Fecha de Ingreso')
+        estado = Col('Estado')
+
+    class empleado(object):
+        def __init__(self, id, nombre, cedula, departamento, tipo_persona, fecha_ingreso, estado):
+            self.id = id
+            self.nombre = nombre
+            self.cedula = cedula
+            self.departamento = departamento
+            self.tipo_persona = tipo_persona
+            self.fecha_ingreso = fecha_ingreso
+            self.estado = estado
+
+    for a, b, c, d, e, f, g in data:
+        print(a,b,c,d,e,f,g)
+
+    empleados = [empleado(a, b, c, d, e, f, g)]
+    table = empleadosTable(empleados)
+
+    return render_template("Empleados.html", table = table)
 
 @app.route('/Administracion.html')
 def administracion():
-    return render_template("Administracion.html")
+    cursor.execute("select * from `departamentos`;")
+    data = cursor.fetchall()
+    print(*data)
+    class departamentosTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        estado = Col('Estado')
+
+    class departamento(object):
+        def __init__(self, id, descripcion, estado):
+            self.id = id
+            self.descripcion = descripcion
+            self.estado = estado
+
+    for a, b, c in data:
+        print(a,b,c)
+
+    departamentos = [departamento(a, b, c)]
+    table = departamentosTable(departamentos)
+
+    return render_template("Administracion.html", table = table)
 
 @app.route('/get_data_ta')
 def get_data_ta():
@@ -179,9 +285,6 @@ def finanzas():
 
     for a, b, c in data:
         print(a,b,c)
-        a = a
-        b = b
-        c = c
 
     departamentos = [departamento(a, b, c)]
 #    departamentos = ""
@@ -197,7 +300,27 @@ def finanzas():
 
 @app.route('/Recursos_humanos.html')
 def recursos_humanos():
-    return render_template("Recursos_humanos.html")
+    cursor.execute("select * from `departamentos`;")
+    data = cursor.fetchall()
+    print(*data)
+    class departamentosTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        estado = Col('Estado')
+
+    class departamento(object):
+        def __init__(self, id, descripcion, estado):
+            self.id = id
+            self.descripcion = descripcion
+            self.estado = estado
+
+    for a, b, c in data:
+        print(a,b,c)
+
+    departamentos = [departamento(a, b, c)]
+    table = departamentosTable(departamentos)
+
+    return render_template("Recursos_humanos.html", table = table)
 
 @app.route('/register.html')
 def register():
@@ -209,7 +332,31 @@ def tables():
 
 @app.route('/Tipos-de-activos.html')
 def tipos_de_activos():
-    return render_template("tipos-de-activos.html")
+    cursor.execute("select * from `tipo_activos`;")
+    data = cursor.fetchall()
+    print(*data)
+    class tipo_activosTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        cuenta_compra = Col('Cuenta Compra')
+        cuenta_depreciacion = Col('Cuenta Depreciacion')
+        estado = Col('Estado')
+
+    class tipo_activo(object):
+        def __init__(self, id, descripcion, cuenta_compra, cuenta_depreciacion, estado):
+            self.id = id
+            self.descripcion = descripcion
+            self.cuenta_compra = cuenta_compra
+            self.cuenta_depreciacion = cuenta_depreciacion
+            self.estado = estado
+
+    for a, b, c, d, e in data:
+        print(a,b,c,d,e)
+
+    activos = [tipo_activo(a, b, c, d, e)]
+    table = tipo_activosTable(activos)
+
+    return render_template("tipos-de-activos.html", table = table)
 
 @app.route('/utilities-animation.html')
 def utilities_animation():

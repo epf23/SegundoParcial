@@ -25,14 +25,15 @@
   <title>Activo Fijo</title>
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename = 'vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="{{ url_for('static', filename = 'css/sb-admin-2.min.css') }}" rel="stylesheet">
+
 
   <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename = 'vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -70,14 +71,14 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      
+
       <!-- Nav Item - Empleados -->
       <li class="nav-item">
             <a class="nav-link" href="Empleados.html">
               <i class="fas fa-fw fa-chart-area"></i>
               <span>Empleados</span></a>
           </li>
-    
+
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartamentos" aria-expanded="true" aria-controls="collapse">
               <i class="fas fa-fw fa-folder"></i>
@@ -88,11 +89,11 @@
                 <a class="collapse-item" href="Administracion.html">Administracion</a>
                 <a class="collapse-item" href="Finanzas.html">Finanzas</a>
                 <a class="collapse-item" href="Recursos_humanos.html">Recursos Humanos</a>
-                
+
               </div>
             </div>
           </li>
-    
+
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseActivos" aria-expanded="true" aria-controls="collapse">
               <i class="fas fa-fw fa-folder"></i>
@@ -107,7 +108,7 @@
               </div>
             </div>
           </li>
-          
+
           <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
               <i class="fas fa-fw fa-cog"></i>
@@ -195,7 +196,7 @@
                 <h6 class="dropdown-header">
                   Message Center
                 </h6>
-                
+
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
               </div>
             </li>
@@ -241,16 +242,16 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Depreciación</h1>
 
-          <form action="{{ url_for('btn_agregar_af') }}" method="post">
+          <form action="{{ url_for('btn_agregar_dp') }}" method="post">
               <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Año Proceso" name='año_Proceso'>
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Año Proceso" name='ano_proceso'>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Mes Proceso" name='mes_Proceso'>
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Mes Proceso" name='mes_proceso'>
                   </div>
                 </div>
-    
+
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Activo Fijo" name='activos_fijos'>
@@ -259,7 +260,7 @@
                       <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Depreciación Acumulada" name='depreciacion_acumulada'>
                     </div>
                   </div>
-    
+
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
@@ -276,9 +277,9 @@
                       <input type="date" class="form-control form-control-user" id="exampleLastName" placeholder="FechaRegistro" name='fecharegistro'>
                     </div>
                   </div>
-    
-    
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" id="btn-add">Agregar</button>
+
+
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick="addRow()">Agregar</button>
                 <div class="text-center">
                 </div>
               </form>
@@ -315,7 +316,7 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    
+
                   </tbody>
                 </table>
               </div>
@@ -369,21 +370,22 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{{ url_for('static', filename = 'vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="{{ url_for('static', filename = 'js/sb-admin-2.min.js') }}"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="{{ url_for('static', filename = 'vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  <script src="{{ url_for('static', filename = 'js/demo/datatables-demo.js') }}"></script>
 
 </body>
 
