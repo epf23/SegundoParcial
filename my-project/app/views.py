@@ -80,6 +80,7 @@ def depreciacion():
         id = Col('ID')
         ano_proceso = Col('Ano de proceso')
         mes_proceso= Col('Mes de proceso')
+        activo_fijo = Col('Activo Fijo')
         fecha_proceso = Col('Fecha de proceso')
         monto_depreciado = Col('Monto Depreciado')
         depreciacion_acumulada = Col('Depreciación Acumulada')
@@ -87,10 +88,11 @@ def depreciacion():
         cuenta_depreciacion = Col('Cuenta Depreciación')
 
     class calculo_depreciacion(object):
-        def __init__(self, id, ano_proceso, mes_proceso, fecha_proceso, monto_depreciado, depreciacion_acumulada, cuenta_compra, cuenta_depreciacion):
+        def __init__(self, id, ano_proceso, mes_proceso, activo_fijo, fecha_proceso, monto_depreciado, depreciacion_acumulada, cuenta_compra, cuenta_depreciacion):
             self.id = id
             self.ano_proceso = ano_proceso
             self.mes_proceso = mes_proceso
+            self.activo_fijo = activo_fijo
             self.fecha_proceso = fecha_proceso
             self.monto_depreciado = monto_depreciado
             self.depreciacion_acumulada = depreciacion_acumulada
@@ -106,24 +108,25 @@ def depreciacion():
     f = ""
     g = ""
     h = ""
+    i = ""
 
-    for a, b, c, d, e, f, g, h in data:
-        print(a,b,c,d,e,f,g,h)
+    for a, b, c, d, e, f, g, h, i in data:
+        print(a,b,c,d,e,f,g,h, i)
 
-    depreciacion = [calculo_depreciacion(a, b, c, d, e, f, g, h)]
+    depreciacion = [calculo_depreciacion(a, b, c, d, e, f, g, h, i)]
     table = calculo_depreciacionTable(depreciacion)
 
     return render_template("Depreciacion.html", table = table)
 
 @app.route('/btn_agregar_dp', methods=['POST'])
 def btn_agregar_dp():
-    ano_proceso = request.form['ano_proceso']
+    ano_proceso = int(request.form['ano_proceso'])
     activos_fijos = request.form['activos_fijos']
     mes_proceso = request.form['mes_proceso']
     fecha_proceso = request.form['fecha_proceso']
     monto_depreciado = request.form['monto_dep']
     depreciacion_acumulada = request.form['depreciacion_acumulada']
-    cuenta_compra = request.form['cuenta_compra']
+    cuenta_compra = int(request.form['cuenta_compra'])
     cuenta_depreciacion = request.form['cuenta_dep']
     valor_compra = cuenta_compra
     ano_dep = ano_proceso
@@ -131,7 +134,7 @@ def btn_agregar_dp():
     dep_ac = monto_dep
     dep_rest = valor_compra - dep_ac
 
-    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+ano_proceso+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+"', "+cuenta_compra+", "+cuenta_depreciacion+");")
+    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+str(ano_proceso)+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+", '"+str(cuenta_compra)+"', '"+cuenta_depreciacion+"');")
     inf_Activos_Fijos.commit()
     return render_template("Depreciacion.html")
 
