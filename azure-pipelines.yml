@@ -23,7 +23,8 @@ steps:
     pip3.7 install setuptools
     pip3.7 install -r requirements.txt
 
-
+  # The displayName is shows in the pipeline UI when a build runs
+  displayName: 'Install Dependencies'
 
 - task: ArchiveFiles@2
   inputs:
@@ -45,8 +46,5 @@ steps:
 
     # The following command is specific to the python-sample-vscode-flask-tutorial code.
     # You may or may not need a startup command for your own app.
-
-    # The displayName is shows in the pipeline UI when a build runs
-    displayName: 'Install Dependencies'
 
     StartupCommand: 'gunicorn --bind=0.0.0.0 --workers=4 startup:app'
