@@ -1,9 +1,9 @@
 variables:
   # Replace this name with that of the Azure service connection in your DevOps project
-  ConnectedServiceName: 'Azure_Primary'
+  ConnectedServiceName: 'Azure Primary'
 
   # Replace this name to match the name of the App Service you created earlier
-  WebAppName: 'Flask_Pipelines'
+  WebAppName: 'Flask Pipelines'
 
 trigger:
 - master
