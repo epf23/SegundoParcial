@@ -4,6 +4,7 @@
 import mysql.connector
 
 from flask import render_template, request
+from flask_table import Table, Col
 
 from app import app
 
@@ -15,6 +16,8 @@ inf_Activos_Fijos = mysql.connector.connect(
   database="inf_Activos_Fijos"
 )
 cursor = inf_Activos_Fijos.cursor()
+
+
 
 @app.route('/')
 def index1():
@@ -52,6 +55,7 @@ def btn_agregar_af():
 
     cursor.execute("Insert into inf_Activos_Fijos.activos_fijos (act_descripcion, act_departamento, act_tipo_activo, act_fecha_registro, act_valor_compra, act_depreciacion_acumulada) values('"+descripcion+"', '"+departamento+"', '"+tactivo+"', '"+fregistro+"', "+vcompra+", "+depreciacion_acumulada+");")
     inf_Activos_Fijos.commit()
+    return render_template("Activo_fijo.html")
 
 @app.route('/btn_agregar_ta', methods=['POST'])
 def btn_agregar_ta():
@@ -62,6 +66,7 @@ def btn_agregar_ta():
 
     cursor.execute("Insert into inf_Activos_Fijos.tipo_activos (ta_descripcion, ta_CCCompra, ta_CCDepreciacion, ta_estado) values('"+descripcion+"', '"+ccompra+"', '"+cdepreciacion+"', '"+estado+"');")
     inf_Activos_Fijos.commit()
+    return render_template("tipos-de-activos.html")
 
 @app.route('/Empleados.html')
 def Empleados():
@@ -78,23 +83,25 @@ def get_data_ta():
 
 @app.route('/btn_agregar_e', methods=['POST'])
 def btn_agregar_e():
-    nombre = request.form['nombre']
-    cedula = request.form['cedula']
-    departamento = request.form['departamento']
-    fingreso = request.form['fingreso']
-    tipopersona = request.form['row-1-office']
-    estado = request.form['row-2-office']
+    nombre = str(request.form.get('nombre', False))
+    cedula = str(request.form.get('cedula', False))
+    departamento = str(request.form.get('departamento', False))
+    fingreso = str(request.form.get('fingreso', False))
+    tipopersona = str(request.form.get('row-1-office', False))
+    estado = str(request.form.get('row-2-office', False))
 
-    cursor.execute("Insert into inf_Activos_Fijos.empleados (emp_nombre, emp_cedula, emp_departamento, emp_tipo_persona, emp_fecha_ingreso, emp_estado) values('"+nombre+"', '"+cedula+"', '"+departamento+"', '"+tipopersona+"', '"+fingreso+"', '"+estado+"');")
+    cursor.execute("Insert into inf_Activos_Fijos.empleados (emp_nombre, emp_cedula, emp_departamento, emp_tipo_persona, emp_fecha_ingreso, emp_estado) values('"+nombre+"', '"+cedula+"', '"+departamento+"', '"+tipopersona+"','2019-08-08', '"+estado+"');")
     inf_Activos_Fijos.commit()
+    return render_template("Empleados.html")
 
 @app.route('/btn_agregar_a', methods=['POST'])
 def btn_agregar_a():
-    descripcion = request.form['descripcion']
-    estado = request.form['row-1-office']
+    descripcion = str(request.form.get('descripcion', False))
+    estado = str(request.form.get('row-1-office', False))
 
     cursor.execute("Insert into inf_Activos_Fijos.departamentos (dep_descripcion, dep_estado) values('"+descripcion+"', '"+estado+"');")
     inf_Activos_Fijos.commit()
+    return render_template("Administracion.html")
 
 @app.route('/btn_agregar_f', methods=['POST'])
 def btn_agregar_f():
@@ -103,6 +110,7 @@ def btn_agregar_f():
 
     cursor.execute("Insert into inf_Activos_Fijos.departamentos (dep_descripcion, dep_estado) values('"+descripcion+"', '"+estado+"');")
     inf_Activos_Fijos.commit()
+    return render_template("Finanzas.html")
 
 @app.route('/btn_agregar_rh', methods=['POST'])
 def btn_agregar_rh():
@@ -111,6 +119,7 @@ def btn_agregar_rh():
 
     cursor.execute("Insert into inf_Activos_Fijos.departamentos (dep_descripcion, dep_estado) values('"+descripcion+"', '"+estado+"');")
     inf_Activos_Fijos.commit()
+    return render_template("Recursos_humanos.html")
 
 @app.route('/blank.html')
 def blank():
@@ -130,7 +139,37 @@ def charts():
 
 @app.route('/Finanzas.html')
 def finanzas():
-    return render_template("Finanzas.html")
+    cursor.execute("select * from `departamentos`;")
+    data = cursor.fetchall()
+    print(*data)
+    class departamentosTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        estado = Col('Estado')
+
+    class departamento(object):
+        def __init__(self, id, descripcion, estado):
+            self.id = id
+            self.descripcion = descripcion
+            self.estado = estado
+
+    for a, b, c in data:
+        print(a,b,c)
+        aa = a
+        bb = b
+        cc = c
+
+    departamentos = [departamento(aa, bb, cc)]
+#    departamentos = ""
+#    i = 0
+#    while i < (len(tabla)%3 == 0):
+#        tabla.insert(0,"")
+#        departamentos = departamento[(str(tabla[(i*3)+1]), str(tabla[(i*3)+2]), str(tabla[(i*3)+3]))]
+#        i +=1
+
+    table = departamentosTable(departamentos)
+
+    return render_template("Finanzas.html", table = table)
 
 @app.route('/Recursos_humanos.html')
 def recursos_humanos():

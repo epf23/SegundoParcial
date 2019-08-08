@@ -8,9 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
 
   <title>Activo Fijo - Departamentos</title>
-
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Custom fonts for this template-->
   <link href="{{ url_for('static', filename = 'vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -340,30 +342,10 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Estado</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-
-
-                  </tbody>
-                </table>
+                {{ table }}
               </div>
             </div>
           </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -412,6 +394,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.js') }}"></script>
   <script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->
@@ -426,6 +409,45 @@
 
   <!-- Page level custom scripts -->
   <script src="{{ url_for('static', filename = 'js/demo/datatables-demo.js') }}"></script>
+
+<!--
+  <script>
+    $(document).ready(function(){
+      $.ajax({
+        url:"static/datosp.json",
+        dataType:"json",
+        success:function(data){
+          $(data.datos)each(function(index,value){
+            var record="<tr><td>"+(index+1)+"</td><td>"+value.id+"</td><td>"+value.descripcion+"<td><td>"+value.estado+"</td><tr>";
+            $("dataTable").append(record);
+          })
+        }
+      })
+    })
+  </script>
+
+
+  var datosp_data = '';
+  $.each(data, function(key, value){
+      datosp_data += '<tr>';
+      datosp_data += '<td>' + value.id + '</td>';
+      datosp_data += '<td>' + value.descripcion + '</td>';
+      datosp_data += '<td>' + value.estado + '</td>';
+      datosp_data += '</tr>';
+  });
+  $('#dataTable').append(datosp_data);
+
+  <script>
+    $.getJSON("static/datosp.json", function(data){
+      console.log(data);
+    });
+
+  </script>
+
+-->
+
+
+
 
 </body>
 
