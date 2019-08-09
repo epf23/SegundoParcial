@@ -358,6 +358,8 @@ def btn_agregar_ac():
     fecha_asiento = request.form['fecha_asiento']
     monto_asiento = request.form['monto_asiento']
     estado = request.form['estado']
+    cursor.execute("SELECT * FROM `asientos_contables`;")
+    data = cursor.fetchall()
 
     class asientos_contablesTable(Table):
         id = Col('ID')
@@ -392,12 +394,12 @@ def btn_agregar_ac():
     for a, b, c, d, e, f, g, h in data:
         print(a,b,c,d,e, f, g, h)
 
-    activos = [tipo_activo(a, b, c, d, e)]
-    table = tipo_activosTable(activos)
+    activos = [asientos_contables(a, b, c, d, e, f, g, h)]
+    table = asientos_contablesTable(activos)
 
     cursor.execute("Insert into inf_Activos_Fijos.asientos_contables (ac_descripcion, ac_tipo_inventario, ac_cuenta_contable, ac_tipo_movimiento, ac_fecha_asiento, ac_monto_asiento, ac_estado) values('"+descripcion+"', '"+tipo_inventario+"', '"+cuenta_contable+"', '"+tipo_movimiento+"', "+fecha_asiento+", "+monto_asiento+", "+estado+");")
     inf_Activos_Fijos.commit()
-    return render_template("Asientos_contables.html")
+    return render_template("Asientos_contables.html", table = table)
     
     
 @app.route('/Tipos-de-activos.html')
