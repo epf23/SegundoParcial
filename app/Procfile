@@ -1,0 +1,2 @@
+web: gunicorn __ini__:app --log-file=-
+heroku ps:scale web=1
