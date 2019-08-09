@@ -24,7 +24,7 @@
 
   <title>Activo Fijo</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="{{ url_for('static', filename = 'vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -107,13 +107,13 @@
 
               </div>
             </div>
-            <li class="nav-item">
-              <a class="nav-link" href="Asientos_contables.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Asientos Contables</span></a>
-            </li>
-          </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="Asientos_contables.html">
+                  <i class="fas fa-fw fa-chart-area"></i>
+                  <span>Asientos Contables</span></a>
+              </li>
+          </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -140,13 +140,10 @@
             <i class="fa fa-bars"></i>
           </button>
 
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            
             <div class="topbar-divider d-none d-sm-block"></div>
-
 
           </ul>
 
@@ -157,48 +154,62 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Activo Fijo</h1>
-        <form action="{{ url_for('btn_agregar_af') }}" method="post">
-          <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Descripcion" name='descripcion'>
-              </div>
-              <div class="col-sm-6">
-                <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Departamento" name='departamento'>
-              </div>
-            </div>
+          <h1 class="h3 mb-2 text-gray-800">Asientos Contables</h1>
 
-            <div class="form-group row">
+          <form action="{{ url_for('btn_agregar_ac') }}" method="post">
+              <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                  <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Valor Compra" name='valor_compra'>
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Descripcion" name='descripcion'>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Tipo de inventario" name='tipo_inventario'>
+                  </div>
                 </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Depreciación Acumulada" name='depreciacion_acumulada'>
-                </div>
-              </div>
 
-            <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                    <td><select size="1" id="row-1-office" class="form-control" name="row-1-office">
-                        <option value="Circulante" selected="selected">
-                            Circulante
-                        </option>
-                        <option value="Pasivo">
-                            Pasivo
-                        </option>
-                    </select>
-                    </td>
-                </div>
-                <div class="col-sm-6">
-                  <input type="date" class="form-control form-control-user" id="exampleLastName" placeholder="FechaRegistro" name='fecharegistro'>
-                </div>
-              </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Cuenta Contable" name='cuenta_contable'>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <td><select size="1" id="row-1-office" class="form-control" name="tipo_movimiento">
+                            <option value="DB" selected="selected">
+                                DB
+                            </option>
+                            <option value="CR">
+                                CR
+                            </option>
+                        </select>
+                        </td>
+                    </div>
+                  </div>
 
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <input type="date" class="form-control form-control-user" id="exampleLastName" placeholder="Fecha Asiento" name='fecha_asiento'>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Monto Asiento" name='monto_asiento'>
+                  </div>
+                  </div>
 
-            <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" id="btn-add">Agregar</button>
-            <div class="text-center">
-            </div>
-          </form>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <td><select size="1" id="row-1-office" class="form-control" name="estado">
+                            <option value="Activo" selected="selected">
+                                Activo
+                            </option>
+                            <option value="Inactivo">
+                                Inactivo
+                            </option>
+                        </select>
+                        </td>
+                    </div>
+                    </div>
+
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" onclick="addRow()">enviar</button>
+                <div class="text-center">
+                </div>
+              </form>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -240,6 +251,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.js') }}"></script>
   <script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Core plugin JavaScript-->
