@@ -11,8 +11,8 @@ from app import app
 ##Conexión a la BD
 inf_Activos_Fijos = mysql.connector.connect(
   host="localhost",
-  user="estefania",
-  passwd="password",
+  user="root",
+  passwd="admin",
   database="inf_Activos_Fijos"
 )
 cursor = inf_Activos_Fijos.cursor()
@@ -99,7 +99,7 @@ def depreciacion():
             self.cuenta_compra = cuenta_compra
             self.cuenta_depreciacion = cuenta_depreciacion
 
-    
+
     a = ""
     b = ""
     c = ""
@@ -128,7 +128,7 @@ def btn_agregar_dp():
     depreciacion_acumulada = request.form['depreciacion_acumulada']
     cuenta_compra = int(request.form['cuenta_compra'])
     cuenta_depreciacion = request.form['cuenta_dep']
-    
+
     cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+str(ano_proceso)+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+", '"+str(cuenta_compra)+"', '"+cuenta_depreciacion+"');")
     inf_Activos_Fijos.commit()
     return render_template("Depreciacion.html")
@@ -228,7 +228,7 @@ def administracion():
     a = ""
     b = ""
     c = ""
-    
+
     for a, b, c in data:
         print(a,b,c)
 
@@ -400,8 +400,8 @@ def btn_agregar_ac():
     cursor.execute("Insert into inf_Activos_Fijos.asientos_contables (ac_descripcion, ac_tipo_inventario, ac_cuenta_contable, ac_tipo_movimiento, ac_fecha_asiento, ac_monto_asiento, ac_estado) values('"+descripcion+"', '"+tipo_inventario+"', '"+cuenta_contable+"', '"+tipo_movimiento+"', "+fecha_asiento+", "+monto_asiento+", "+estado+");")
     inf_Activos_Fijos.commit()
     return render_template("Asientos_contables.html", table = table)
-    
-    
+
+
 @app.route('/Tipos-de-activos.html')
 def tipos_de_activos():
     cursor.execute("select * from `tipo_activos`;")
