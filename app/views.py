@@ -128,15 +128,22 @@ def btn_agregar_dp():
     depreciacion_acumulada = request.form['depreciacion_acumulada']
     cuenta_compra = int(request.form['cuenta_compra'])
     cuenta_depreciacion = request.form['cuenta_dep']
+    
+    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+str(ano_proceso)+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+", '"+str(cuenta_compra)+"', '"+cuenta_depreciacion+"');")
+    inf_Activos_Fijos.commit()
+    return render_template("Depreciacion.html")
+
+@app.route('/index.html')
+def dash():
+    cuenta_compra = int(request.form['cuenta_compra'])
+    ano_proceso = int(request.form['ano_proceso'])
+    depreciacion_acumulada = request.form['depreciacion_acumulada']
     valor_compra = cuenta_compra
     ano_dep = ano_proceso
     monto_dep = valor_compra / ano_dep
     dep_ac = monto_dep
     dep_rest = valor_compra - dep_ac
-
-    cursor.execute("Insert into inf_Activos_Fijos.calculo_depreciacion (cd_ano_proceso, cd_mes_proceso, id_activos_fijos, cd_fecha_proceso, cd_monto_depreciado, cd_depreciacion_acumulada, cd_cuenta_compra, cd_cuenta_depreciacion) values('"+str(ano_proceso)+"', '"+mes_proceso+"', '"+activos_fijos+"', '"+fecha_proceso+"', "+monto_depreciado+", "+depreciacion_acumulada+", '"+str(cuenta_compra)+"', '"+cuenta_depreciacion+"');")
-    inf_Activos_Fijos.commit()
-    return render_template("Depreciacion.html")
+    return render_template("index.html", depreciacion_acumulada=depreciacion_acumulada, monto_dep=monto_dep, dep_rest=dep_rest)
 
 @app.route('/btn_agregar_af', methods=['POST'])
 def btn_agregar_af():
@@ -275,22 +282,6 @@ def btn_agregar_rh():
     inf_Activos_Fijos.commit()
     return render_template("Recursos_humanos.html")
 
-@app.route('/blank.html')
-def blank():
-    return render_template("blank.html")
-
-@app.route('/buttons.html')
-def buttons():
-    return render_template("buttons.html")
-
-@app.route('/cards.html')
-def cards():
-    return render_template("cards.html")
-
-@app.route('/charts.html')
-def charts():
-    return render_template("charts.html")
-
 @app.route('/Finanzas.html')
 def finanzas():
     cursor.execute("select * from `departamentos`;")
@@ -354,14 +345,61 @@ def recursos_humanos():
 
     return render_template("Recursos_humanos.html", table = table)
 
-@app.route('/register.html')
-def register():
-    return render_template("register.html")
-
-@app.route('/tables.html')
+@app.route('/Asientos_contables.html')
 def tables():
-    return render_template("tables.html")
+    return render_template("Asientos_contables.html")
 
+@app.route('/btn_agregar_ac', methods=['POST'])
+def btn_agregar_ac():
+    descripcion = request.form['descripcion']
+    tipo_inventario = request.form['tipo_inventario']
+    cuenta_contable = request.form['cuenta_contable']
+    tipo_movimiento = request.form['tipo_movimiento']
+    fecha_asiento = request.form['fecha_asiento']
+    monto_asiento = request.form['monto_asiento']
+    estado = request.form['estado']
+
+    class asientos_contablesTable(Table):
+        id = Col('ID')
+        descripcion = Col('Descripcion')
+        tipo_inventario = Col('tipo_inventario')
+        cuenta_contable = Col('cuenta_contable')
+        tipo_movimiento = Col('tipo_movimiento')
+        fecha_asiento = Col('fecha_asiento')
+        monto_asiento = Col('monto_asiento')
+        estado = Col('Estado')
+
+    class asientos_contables(object):
+        def __init__(self, id, descripcion, tipo_inventario, cuenta_contable, tipo_movimiento, fecha_asiento, monto_asiento, estado):
+            self.id = id
+            self.descripcion = descripcion
+            self.tipo_inventario = tipo_inventario
+            self.cuenta_contable = cuenta_contable
+            self.tipo_movimiento = tipo_movimiento
+            self.fecha_asiento = fecha_asiento
+            self.monto_asiento = monto_asiento
+            self.estado = estado
+
+    a = ""
+    b = ""
+    c = ""
+    d = ""
+    e = ""
+    f = ""
+    g = ""
+    h = ""
+
+    for a, b, c, d, e, f, g, h in data:
+        print(a,b,c,d,e, f, g, h)
+
+    activos = [tipo_activo(a, b, c, d, e)]
+    table = tipo_activosTable(activos)
+
+    cursor.execute("Insert into inf_Activos_Fijos.asientos_contables (ac_descripcion, ac_tipo_inventario, ac_cuenta_contable, ac_tipo_movimiento, ac_fecha_asiento, ac_monto_asiento, ac_estado) values('"+descripcion+"', '"+tipo_inventario+"', '"+cuenta_contable+"', '"+tipo_movimiento+"', "+fecha_asiento+", "+monto_asiento+", "+estado+");")
+    inf_Activos_Fijos.commit()
+    return render_template("Asientos_contables.html")
+    
+    
 @app.route('/Tipos-de-activos.html')
 def tipos_de_activos():
     cursor.execute("select * from `tipo_activos`;")
@@ -381,6 +419,12 @@ def tipos_de_activos():
             self.cuenta_compra = cuenta_compra
             self.cuenta_depreciacion = cuenta_depreciacion
             self.estado = estado
+
+    a = ""
+    b = ""
+    c = ""
+    d = ""
+    e = ""
 
     for a, b, c, d, e in data:
         print(a,b,c,d,e)
