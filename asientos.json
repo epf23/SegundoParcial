@@ -1,0 +1,9 @@
+{
+        "Cuentas": [
+            { "id": 65, "cuenta": "Gasto depreciación Activos Fijos", "tipo": "DB", "monto": 12345 },
+            { "id": 66, "cuenta": "Depreciación Acumulada Activos Fijos", "tipo": "CR", "monto": 12345 }
+                ],
+                "Descripcion": "Asiento Contable - Activo Fijo",
+                "Auxiliar": 8
+}
+    

@@ -2,6 +2,8 @@
 
 #Importar conector MySQL
 import mysql.connector
+import requests
+import json
 
 from flask import render_template, request
 from flask_table import Table, Col
@@ -306,13 +308,6 @@ def finanzas():
         print(a,b,c)
 
     departamentos = [departamento(a, b, c)]
-#    departamentos = ""
-#    i = 0
-#    while i < (len(tabla)%3 == 0):
-#        tabla.insert(0,"")
-#        departamentos = departamento[(str(tabla[(i*3)+1]), str(tabla[(i*3)+2]), str(tabla[(i*3)+3]))]
-#        i +=1
-
     table = departamentosTable(departamentos)
 
     return render_template("Finanzas.html", table = table)
@@ -352,54 +347,29 @@ def tables():
 @app.route('/btn_agregar_ac', methods=['POST'])
 def btn_agregar_ac():
     descripcion = request.form['descripcion']
-    tipo_inventario = request.form['tipo_inventario']
-    cuenta_contable = request.form['cuenta_contable']
-    tipo_movimiento = request.form['tipo_movimiento']
-    fecha_asiento = request.form['fecha_asiento']
     monto_asiento = request.form['monto_asiento']
-    estado = request.form['estado']
-    cursor.execute("SELECT * FROM `asientos_contables`;")
-    data = cursor.fetchall()
 
-    class asientos_contablesTable(Table):
-        id = Col('ID')
-        descripcion = Col('Descripcion')
-        tipo_inventario = Col('tipo_inventario')
-        cuenta_contable = Col('cuenta_contable')
-        tipo_movimiento = Col('tipo_movimiento')
-        fecha_asiento = Col('fecha_asiento')
-        monto_asiento = Col('monto_asiento')
-        estado = Col('Estado')
+    jsonstring = '''{
+        "Cuentas": [
+            { "id": 65, "cuenta": "Gasto depreciación Activos Fijos", "tipo": "DB", "monto": '''+monto_asiento+''' },
+            { "id": 66, "cuenta": "Depreciación Acumulada Activos Fijos", "tipo": "CR", "monto": '''+monto_asiento+''' }
+                ],
+                "Descripcion": "'''+descripcion+'''",
+                "Auxiliar": 8
+}
+    '''
 
-    class asientos_contables(object):
-        def __init__(self, id, descripcion, tipo_inventario, cuenta_contable, tipo_movimiento, fecha_asiento, monto_asiento, estado):
-            self.id = id
-            self.descripcion = descripcion
-            self.tipo_inventario = tipo_inventario
-            self.cuenta_contable = cuenta_contable
-            self.tipo_movimiento = tipo_movimiento
-            self.fecha_asiento = fecha_asiento
-            self.monto_asiento = monto_asiento
-            self.estado = estado
+    with open('asientos.json', 'w') as f:
+        f.write(jsonstring)
 
-    a = ""
-    b = ""
-    c = ""
-    d = ""
-    e = ""
-    f = ""
-    g = ""
-    h = ""
+    json1_file = open('asientos.json')
+    json1_str = json1_file.read()
+    json1_data = json.loads(json1_str)
 
-    for a, b, c, d, e, f, g, h in data:
-        print(a,b,c,d,e, f, g, h)
+    r = requests.post('https://sistemacontabilidad20190808055834.azurewebsites.net/api/asientocontable', json=json1_data )
+    print (r)
 
-    activos = [asientos_contables(a, b, c, d, e, f, g, h)]
-    table = asientos_contablesTable(activos)
-
-    cursor.execute("Insert into inf_Activos_Fijos.asientos_contables (ac_descripcion, ac_tipo_inventario, ac_cuenta_contable, ac_tipo_movimiento, ac_fecha_asiento, ac_monto_asiento, ac_estado) values('"+descripcion+"', '"+tipo_inventario+"', '"+cuenta_contable+"', '"+tipo_movimiento+"', "+fecha_asiento+", "+monto_asiento+", "+estado+");")
-    inf_Activos_Fijos.commit()
-    return render_template("Asientos_contables.html", table = table)
+    return render_template("Asientos_contables.html")
 
 
 @app.route('/Tipos-de-activos.html')
